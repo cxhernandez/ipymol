@@ -23,6 +23,6 @@ mol.server.do('fetch 3odu; as cartoon; bg white')
 mol.Show()
 ```
 This series of commands will define a variable ```mol``` of class ```MolViewer```, which can pass commands to PyMol, and then create an image of ```PDBID:3odu``` in your iPython session.
-Any additional commands can be invoked via ```mol.server.do(ENTER_YOUR_COMMAND_HERE)```.
+Any additional commands can be invoked via ```mol.server.do(ENTER_YOUR_COMMAND_HERE)```
 
 Enjoy!
