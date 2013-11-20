@@ -5,7 +5,7 @@ Control PyMol sessions via iPython
 
 Before You Begin
 ----------------
-Before using iPyMol, you show start a PyMol session in 'server mode'. You can do this by using the ```-R`` flag:
+Before using iPyMol, you show start a PyMol session in 'server mode'. You can do this by using the ```-R``` flag:
 
 ```bash
 $PathToPyMol/pymol -R
