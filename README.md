@@ -11,6 +11,16 @@ Before using iPyMol, you should start a PyMol session in 'server mode'. You can 
 $PathToPyMol/pymol -R
 ```
 
+Alternatively, if PyMol is in your python path, you could just start PyMol in iPython:
+
+```python
+from multiprocessing import Process
+def f(cmd):
+    import os
+    os.system(cmd)
+p=Process(target=f,args=('pymol -Rq',)) #-Rqcp if you don't want the PyMol GUI
+p.start()
+```
 
 Example Usage
 --------------
