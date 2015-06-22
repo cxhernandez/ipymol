@@ -15,9 +15,9 @@ In order to You can fire up an IPython or IPython Notebook session and start usi
 ```python
 from ipymol import init, MolViewer
 init()
-mol = MolViewer()
-mol.do('fetch 3odu; as cartoon; bg white')
-mol.show()
+pymol = MolViewer()
+pymol.do('fetch 3odu; as cartoon; bg white')
+pymol.show()
 ```
 This series of commands will define a variable ```mol``` of class ```MolViewer```, which can pass commands to PyMol, and then create an image of ```PDBID:3odu``` in your IPython session.
 Any additional commands can be invoked via ```mol.server.do(ENTER_YOUR_COMMAND_HERE)```
