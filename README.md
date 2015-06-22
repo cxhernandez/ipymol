@@ -2,10 +2,10 @@ IPyMol
 ======
 Before You Begin
 ----------------
-Please ensure that PyMol is in your `$PATH` or is aliased as `pymol`. In linux this is as easy as:
+Please ensure that PyMol is in your `$PATH` as `pymol` or you can start PyMol in server mode:
 
 ```shell
-$ alias pymol="/PATH/TO/PyMol"
+$ pymol -R #-Rqpc to run it without a GUI
 ```
 
 Example Usage
