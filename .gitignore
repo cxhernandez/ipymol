@@ -1,0 +1,7 @@
+dist/
+build/
+*.egg-info/
+*.swp
+.ipynb_checkpoints
+*.pdb
+*.pyc

@@ -1,38 +1,25 @@
-iPyMol
+IPyMol
 ======
-
-Control PyMol sessions via iPython
-
 Before You Begin
 ----------------
-Before using iPyMol, you should start a PyMol session in 'server mode'. You can do this by using the ```-R``` flag:
+Please ensure that PyMol is in your `$PATH` as `pymol` or you can start PyMol in server mode:
 
-```bash
-$PathToPyMol/pymol -R
-```
-
-Alternatively, if PyMol is in your python path, you could just start PyMol in iPython:
-
-```python
-from multiprocessing import Process
-def f(cmd):
-    import os
-    os.system(cmd)
-p=Process(target=f,args=('pymol -Rq',)) #-Rqcp if you don't want the PyMol GUI
-p.start()
+```shell
+$ pymol -R #-Rqpc to run it without a GUI
 ```
 
 Example Usage
 --------------
-Once PyMol is open in 'server mode', you can fire up an iPython or iPython Notebook session and start using iPyMol. For example:
+In order to You can fire up an IPython or IPython Notebook session and start using IPyMol. For example:
 
 ```python
-import ipymol
-mol=ipymol.MolViewer()
-mol.server.do('fetch 3odu; as cartoon; bg white')
-mol.Show()
+from ipymol import init, MolViewer
+init()
+mol = MolViewer()
+mol.do('fetch 3odu; as cartoon; bg white')
+mol.show()
 ```
-This series of commands will define a variable ```mol``` of class ```MolViewer```, which can pass commands to PyMol, and then create an image of ```PDBID:3odu``` in your iPython session.
+This series of commands will define a variable ```mol``` of class ```MolViewer```, which can pass commands to PyMol, and then create an image of ```PDBID:3odu``` in your IPython session.
 Any additional commands can be invoked via ```mol.server.do(ENTER_YOUR_COMMAND_HERE)```
 
 Here's an additional [example](http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/Example.ipynb).
