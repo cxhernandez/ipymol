@@ -24,7 +24,7 @@ setup(
     zip_safe=True,
     platforms=["Windows", "Linux", "Mac OS-X", "Unix"],
     classifiers=[e.strip() for e in classifiers.splitlines()],
-    author="Carlos Xavier Hernández",
+    author="Carlos Xavier Hernandez",
     author_email="cxh@stanford.edu",
     description=("View and control your PyMol sessions from "
                  "the IPython Notebook."),

@@ -1,7 +1,7 @@
 # $Id$
 # This Python file uses the following encoding: utf-8
 """
-#   Author: Carlos Xavier Hernández [cxh@stanford.edu]
+#   Author: Carlos Xavier Hernandez [cxh@stanford.edu]
 #
 #
 """
@@ -24,6 +24,7 @@ def init():
     from multiprocessing import Process
 
     def f(cmd):
+        import os
         os.system(cmd)
 
     Process(target=f, args=('pymol -Rqcp',)).start()
@@ -84,7 +85,7 @@ class MolViewer(object):
             ValueError('Time should be non-negative.')
         with tempfile.NamedTemporaryFile(suffix='.png', delete=False) as fd:
             fname = fd.name
-        self.server.do('png %s, %d, %d, %d' % (fname, height, width, dpi))
+        self.do('png %s, %d, %d, %d' % (fname, height, width, dpi))
         time.sleep(0.2)  # <- wait a short period so that PyMol can finish
         img = None
         for i in range(10):
