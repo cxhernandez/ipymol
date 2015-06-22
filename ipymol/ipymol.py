@@ -1,10 +1,3 @@
-# $Id$
-# This Python file uses the following encoding: utf-8
-"""
-#   Author: Carlos Xavier Hernandez [cxh@stanford.edu]
-#
-#
-"""
 import os
 import time
 import tempfile
@@ -27,7 +20,8 @@ def init():
         import os
         os.system(cmd)
 
-    Process(target=f, args=('pymol -Rqcp',)).start()
+    p = Process(target=f, args=('pymol -Rqcp',))
+    p.start()
 
 
 class MolViewer(object):
