@@ -20,7 +20,7 @@ def init():
         import os
         os.system(cmd)
 
-    p = Process(target=f, args=('pymol -Rqcp',))
+    p = Process(target=f, args=('pymol -Rq',))
     p.start()
 
 
