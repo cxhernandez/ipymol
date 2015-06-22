@@ -20,7 +20,7 @@ pymol.do('fetch 3odu; as cartoon; bg white')
 pymol.show()
 ```
 This series of commands will define a variable ```mol``` of class ```MolViewer```, which can pass commands to PyMol, and then create an image of ```PDBID:3odu``` in your IPython session.
-Any additional commands can be invoked via ```pmol.do("[ENTER YOUR COMMAND HERE]")```
+Any additional commands can be invoked via ```pymol.do("[ENTER YOUR COMMAND HERE]")```
 
 Here's an additional [example](http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/Example.ipynb).
 
