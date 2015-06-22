@@ -1,5 +1,8 @@
 IPyMol
 ======
+
+IPyMol allows you to control PyMol sessions via IPython. This tool is ideal for situations where you'd like to present your work neatly in a [Jupyter Notebook](https://jupyter.org/) or conveniently prototype PyMol scripts.
+
 Before You Begin
 ----------------
 Please ensure that PyMol is in your `$PATH` as `pymol` or you can start PyMol in server mode:
