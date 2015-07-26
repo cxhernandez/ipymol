@@ -9,7 +9,7 @@ Please ensure that PyMOL is in your ``$PATH`` as ``pymol`` or you can start PyMO
 
 .. code:: shell
 
-    $ pymol -R #-Rqpc to run it without a GUI
+    $ pymol -R #-cKRQ to run it without a GUI
 
 Example Usage
 --------------
@@ -17,9 +17,8 @@ In order to You can fire up an IPython or IPython Notebook session and start usi
 
 .. code:: python
 
-    from ipymol import init, MolViewer
-    init()
-    pymol = MolViewer()
+    from ipymol import viewer as pymol
+    pymol.start()   # Start PyMOL RPC server
     pymol.do('fetch 3odu; as cartoon; bg white')
     pymol.show()
 
