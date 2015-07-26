@@ -11,6 +11,16 @@ Please ensure that PyMOL is in your ``$PATH`` as ``pymol`` or you can start PyMO
 
     $ pymol -R #-cKRQ to run it without a GUI
 
+Installation
+------------
+
+
+.. code:: shell
+
+    pip install ipymol
+
+
+
 Example Usage
 --------------
 You can fire up an IPython or IPython Notebook session and start using IPyMOL. For example:
