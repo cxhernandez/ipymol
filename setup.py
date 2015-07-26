@@ -2,8 +2,9 @@
 import sys
 from setuptools import setup, find_packages
 
-NAME    = "ipymol"
-VERSION = "0.1"
+NAME = "ipymol"
+VERSION = "0.2"
+
 
 def read(filename):
     import os
@@ -30,14 +31,12 @@ if sys.version_info >= (3, 0):
 setup(
     name=NAME,
     version=VERSION,
-    description=('A enhanced permission system which enable logical permission'
-                 'systems to complex permissions'),
+    description=('IPyMOL allows you to control PyMOL sessions via IPython.'),
     long_description = read('README.rst'),
     platforms = (
         "Windows", "Linux", "Mac OS-X", "Unix",
     ),
     classifiers = (
-        'Development Status :: A - Alpha',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
