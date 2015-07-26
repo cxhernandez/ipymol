@@ -1,34 +1,72 @@
-"""IPyMol: View and control your PyMol sessions from the IPython Notebook.
-"""
-
+"""IPyMOL: View and control your PyMOL sessions from the IPython Notebook"""
+import sys
 from setuptools import setup, find_packages
 
+NAME    = "ipymol"
+VERSION = "0.1"
 
-classifiers = """\
-    Development Status :: 3 - Alpha
-    Intended Audience :: Science/Research
-    License :: OSI Approved :: Apache Software License
-    Programming Language :: Python
-    Programming Language :: Python :: 2.6
-    Programming Language :: Python :: 2.7
-    Operating System :: Unix
-    Operating System :: MacOS
-    Operating System :: Microsoft :: Windows
-    Topic :: Scientific/Engineering"""
+def read(filename):
+    import os
+    BASE_DIR = os.path.dirname(__file__)
+    filename = os.path.join(BASE_DIR, filename)
+    with open(filename, 'r') as fi:
+        return fi.read()
+
+
+def readlist(filename):
+    rows = read(filename).split("\n")
+    rows = [x.strip() for x in rows if x.strip()]
+    return list(rows)
+
+# if we are running on python 3, enable 2to3 and
+# let it use the custom fixers from the custom_fixers
+# package.
+extra = {}
+if sys.version_info >= (3, 0):
+    extra.update(
+        use_2to3=True,
+    )
 
 setup(
-    name="ipymol",
-    version="0.1",
-    packages=find_packages(),
-    scripts=[],
-    zip_safe=True,
-    platforms=["Windows", "Linux", "Mac OS-X", "Unix"],
-    classifiers=[e.strip() for e in classifiers.splitlines()],
+    name=NAME,
+    version=VERSION,
+    description=('A enhanced permission system which enable logical permission'
+                 'systems to complex permissions'),
+    long_description = read('README.rst'),
+    platforms = (
+        "Windows", "Linux", "Mac OS-X", "Unix",
+    ),
+    classifiers = (
+        'Development Status :: A - Alpha',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Operating System :: Unix',
+        'Operating System :: MacOS',
+        'Operating System :: Microsoft :: Windows',
+        'Topic :: Scientific/Engineering',
+    ),
+    keywords = 'ipython notebook pymol protein molecular visualization',
     author="Carlos Xavier Hernandez",
     author_email="cxh@stanford.edu",
-    description=("View and control your PyMol sessions from "
-                 "the IPython Notebook."),
-    license="MIT",
-    keywords="protein molecular visualization",
-    url="http://github.com/cxhernandez/ipymol"
+    url = 'https://github.com/cxhernandez/%s' % NAME,
+    download_url = 'https://github.com/cxhernandez/%s/tarball/master' % NAME,
+    license = 'MIT',
+    packages = find_packages('src'),
+    package_dir = {'': 'src'},
+    include_package_data = True,
+    package_data = {
+        '': ['README.rst',
+             'requirements.txt'],
+    },
+    zip_safe=True,
+    install_requires=readlist('requirements.txt'),
+    **extra
 )
