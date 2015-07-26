@@ -81,7 +81,7 @@ class MolViewer(object):
         self.do('png %s, %d, %d, %d' % (fname, height, width, dpi))
         # retry 10 times and wait a short period everytime so that PyMOL can
         # finish
-        im = None
+        img = None
         for i in xrange(10):
             time.sleep(0.1)
             try:
@@ -109,5 +109,5 @@ class MolViewer(object):
         ax.imshow(np.asarray(self.to_png()))
         return fig
 
-# Create a default instance for convinience
+# Create a default instance for convenience
 viewer = MolViewer()
