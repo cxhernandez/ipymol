@@ -35,6 +35,6 @@ You can fire up an IPython or IPython Notebook session and start using IPyMOL. F
 This series of commands will define a variable ``pymol`` of class ``MolViewer``, which can pass commands to PyMOL, and then create an image of ``PDBID:3odu`` in your IPython session.
 Any additional commands can be invoked via ``pymol.do("[ENTER YOUR COMMAND HERE]")``.
 
-Here's an additional `example <http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/examples/Example.ipynb>`_.
+Here's an additional `example <http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/examples/Example1.ipynb>`_.
 
 Enjoy!
