@@ -1,3 +1,7 @@
+.. image:: https://badge.fury.io/py/ipymol.svg
+    :target: https://pypi.python.org/pypi/mdtraj/ipymol/
+    :alt: Latest PyPI version
+
 IPyMOL
 ======
 
