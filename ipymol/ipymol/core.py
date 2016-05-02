@@ -8,6 +8,9 @@ import warnings
 import matplotlib.pyplot as plt
 
 from ipymol.compat import Image
+import time
+
+
 
 HOST = os.environ.get('PYMOL_RPCHOST', 'localhost')
 PORT = 9123
@@ -39,56 +42,6 @@ class MolViewer(object):
         self._server = xc.ServerProxy(
             uri="http://%s:%d/RPC2" % (self.host, self.port)
         )
-
-        time.sleep(1)
-
-        self._add_methods()
-
-        try:
-            self.ping()
-        except ConnectionRefusedError:
-            warnings.warn('Already connected.')
-
-    def to_png(self, height=0, width=0, dpi=300, delay=0.0):
-        """Render a PNG from a PyMol session
-
-        Parameters
-        ----------
-        height : int
-            Height of rendered image.
-        width : int
-            Width of rendered image.
-        dpi : int
-            Resolution of rendered image in dots-per-inch.
-        delay : float
-            Time delay (seconds) before image is rendered.
-
-        Returns
-        -------
-        img : PIL.Image
-        """
-
-        if delay > 0.0:
-            time.sleep(delay)
-        elif delay < 0.0:
-            ValueError('Time should be non-negative.')
-        fname = tempfile.mkstemp(suffix='.png')[1]
-        self.do('png %s, %d, %d, %d' % (fname, height, width, dpi))
-        # retry 10 times and wait a short period everytime so that PyMOL can
-        # finish
-        img = None
-        for i in xrange(10):
-            time.sleep(0.1)
-            try:
-                img = Image.open(fname)
-                break
-            except IOError:
-                pass
-        if img is not None:
-            os.unlink(fname)
-            return img
-        else:
-            IOError('Could not load image from PyMOL.')
 
     def display(self):
         """Display PyMol session using matplotlib
