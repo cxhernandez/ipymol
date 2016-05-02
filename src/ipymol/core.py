@@ -27,7 +27,7 @@ class MolViewer(object):
             return
         self._thread.start()
         self._server = xc.ServerProxy(
-            'http://%s:%d/RPC2' % (self.host, self.port)
+            uri="http://%s:%d/RPC2" % (self.host, self.port)
         )
         self._server.ping()
 
