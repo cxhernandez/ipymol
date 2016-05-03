@@ -1,11 +1,14 @@
 import os
 import time
 import tempfile
-import xmlrpclib
+import xmlrpc.client as xc
 import threading
 import numpy as np
 import matplotlib.pyplot as plt
 from ipymol.compat import Image
+import time
+
+
 
 HOST = os.environ.get('PYMOL_RPCHOST', 'localhost')
 PORT = 9123
@@ -26,9 +29,10 @@ class MolViewer(object):
             print "A PyMOL RPC server is already running."
             return
         self._thread.start()
-        self._server = xmlrpclib.Server(
-            'http://%s:%d' % (self.host, self.port)
+        self._server = xc.ServerProxy(
+            uri="http://%s:%d/RPC2" % (self.host, self.port)
         )
+        time.sleep(0.5)
         self._server.ping()
 
     def do(self, cmd):
