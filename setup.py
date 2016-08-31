@@ -1,9 +1,10 @@
 """IPyMOL: View and control your PyMOL sessions from the IPython Notebook"""
 import sys
 from setuptools import setup, find_packages
+from ipymol import __name__, __version__
 
-NAME = "ipymol"
-VERSION = "0.3"
+NAME = __name__
+VERSION = __version__
 
 
 def read(filename):
@@ -58,8 +59,8 @@ setup(
     url = 'https://github.com/cxhernandez/%s' % NAME,
     download_url = 'https://github.com/cxhernandez/%s/tarball/master' % NAME,
     license = 'MIT',
-    packages = find_packages('src'),
-    package_dir = {'': 'src'},
+    packages = find_packages('ipymol'),
+    package_dir = {'': 'ipymol'},
     include_package_data = True,
     package_data = {
         '': ['README.rst',
