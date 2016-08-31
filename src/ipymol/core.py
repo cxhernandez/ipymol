@@ -17,7 +17,7 @@ class MolViewer(object):
         self.port = int(port)
         self._thread = threading.Thread(
             target=os.system,
-            args=(('pymol -cKRQ',)),
+            args=(('pymol -RQ',)),
         )
         self._thread.daemon = True
 

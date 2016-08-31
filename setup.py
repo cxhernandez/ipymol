@@ -3,7 +3,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "ipymol"
-VERSION = "0.2"
+VERSION = "0.3"
 
 
 def read(filename):
