@@ -33,12 +33,14 @@ You can fire up an IPython or IPython Notebook session and start using IPyMOL. F
 
     from ipymol import viewer as pymol
     pymol.start()   # Start PyMOL RPC server
-    pymol.do('fetch 3odu; as cartoon; bg white')
-    pymol.show()
+    pymol.fetch('3odu') # Fetch PDB
+    pymol.show_as('cartoon') # Show as cartoon
+    pymol.bg_color('white') # Set background color to white
+    pymol.display() # Show current display
 
 This series of commands will define a variable ``pymol`` of class ``MolViewer``, which can pass commands to PyMOL, and then create an image of ``PDBID:3odu`` in your IPython session.
-Any additional commands can be invoked via ``pymol.do("[ENTER YOUR COMMAND HERE]")``.
+Additional commands can be invoked via ``pymol.do("[ENTER YOUR COMMAND HERE]")``.
 
-Here's an additional `example <http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/examples/Example1.ipynb>`_.
+Here's an `example notebook <http://nbviewer.ipython.org/urls/raw.github.com/cxhernandez/iPyMol/master/examples/Example1.ipynb>`_ with more information.
 
 Enjoy!

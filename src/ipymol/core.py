@@ -4,7 +4,9 @@ import tempfile
 import xmlrpclib
 import threading
 import numpy as np
+import warnings
 import matplotlib.pyplot as plt
+
 from ipymol.compat import Image
 
 HOST = os.environ.get('PYMOL_RPCHOST', 'localhost')
@@ -21,6 +23,14 @@ class MolViewer(object):
         )
         self._thread.daemon = True
 
+        if hasattr(self, '_server'):
+            self._add_methods()
+
+    def _add_methods(self):
+        for method in self._server.system.listMethods():
+            if method[0].islower():
+                setattr(self, method, getattr(self._server, method))
+
     def start(self):
         if self._thread.is_alive():
             print "A PyMOL RPC server is already running."
@@ -29,30 +39,15 @@ class MolViewer(object):
         self._server = xmlrpclib.Server(
             'http://%s:%d' % (self.host, self.port)
         )
-        self._server.ping()
 
-    def do(self, cmd):
-        """Perform any PyMOL command(s)
+        time.sleep(1)
 
-        Parameters
-        ----------
-        cmd : str
-            PyMOL command String.
+        self._add_methods()
 
-        Examples:
-        --------
-        >>> MolViewer.do('as cartoon;')
-
-        """
-
-        if isinstance(cmd, str):
-            self._server.do(cmd)
-        else:
-            TypeError('Command must be a String.')
-
-    def reinit(self):
-        """A convenience function to reinitialize a PyMOL session"""
-        self._server.do('reinit;')
+        try:
+            self.ping()
+        except ConnectionRefusedError:
+            warnings.warn('Already connected.')
 
     def to_png(self, height=0, width=0, dpi=300, delay=0.0):
         """Render a PNG from a PyMol session
@@ -95,7 +90,7 @@ class MolViewer(object):
         else:
             IOError('Could not load image from PyMOL.')
 
-    def show(self):
+    def display(self):
         """Display PyMol session using matplotlib
 
         Returns
