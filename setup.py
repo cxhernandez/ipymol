@@ -59,8 +59,7 @@ setup(
     url = 'https://github.com/cxhernandez/%s' % NAME,
     download_url = 'https://github.com/cxhernandez/%s/tarball/master' % NAME,
     license = 'MIT',
-    packages = find_packages('ipymol'),
-    package_dir = {'': 'ipymol'},
+    packages = find_packages(),
     include_package_data = True,
     package_data = {
         '': ['README.rst',
