@@ -7,6 +7,7 @@ import threading
 import numpy as np
 import warnings
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 from .compat import Image, Server
 
@@ -53,7 +54,10 @@ class MolViewer(object):
         fig = plt.figure(figsize=(20, 20))
         ax = fig.add_subplot(111)
         ax.axis('off')
-        ax.imshow(np.asarray(self.to_png()))
+        png_filename = 'tmp_png_file_for_ipymol' + '.png'
+        self._server.do("cmd.png('%s')" % png_filename )
+        ax.imshow(mpimg.imread(png_filename))
+        os.remove(png_filename)
         return fig
 
 # Create a default instance for convenience
