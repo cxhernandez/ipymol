@@ -3,7 +3,6 @@ from __future__ import print_function
 import os
 import time
 import tempfile
-import xmlrpc.client as xc
 import threading
 import numpy as np
 import warnings
