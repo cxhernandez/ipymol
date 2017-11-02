@@ -26,9 +26,6 @@ class MolViewer(object):
         )
         self._thread.daemon = True
 
-        if hasattr(self, '_server'):
-            self._add_methods()
-
     def _add_methods(self):
         for method in self._server.system.listMethods():
             if method[0].islower():
@@ -42,6 +39,16 @@ class MolViewer(object):
         self._server = Server(
             uri="http://%s:%d/RPC2" % (self.host, self.port)
         )
+
+        # check if the server is online yet, then add methods
+        server_online = False
+        while not server_online:
+            try:
+                if hasattr(self, '_server'):
+                    self._add_methods()
+                server_online = True
+            except:
+                pass
 
     def display(self):
         """Display PyMol session using matplotlib
