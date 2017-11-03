@@ -61,10 +61,10 @@ class MolViewer(object):
         fig = plt.figure(figsize=(20, 20))
         ax = fig.add_subplot(111)
         ax.axis('off')
-        png_filename = 'tmp_png_file_for_ipymol' + '.png'
-        self._server.do("cmd.png('%s')" % png_filename )
-        ax.imshow(mpimg.imread(png_filename))
-        os.remove(png_filename)
+        fh = tempfile.NamedTemporaryFile()
+        self._server.do("cmd.png('%s')" % fh.name)
+        ax.imshow(mpimg.imread(fh.name))
+        os.close(fh)
         return fig
 
 # Create a default instance for convenience
