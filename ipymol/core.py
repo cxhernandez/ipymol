@@ -26,6 +26,9 @@ class MolViewer(object):
         )
         self._thread.daemon = True
 
+    def __getattr__(self, key):
+        return getattr(self._server, key)
+
     def _add_methods(self):
         for method in self._server.system.listMethods():
             if method[0].islower():
