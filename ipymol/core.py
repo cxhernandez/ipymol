@@ -52,6 +52,7 @@ class MolViewer(object):
                 server_online = True
             except:
                 pass
+        self._add_methods()
 
     def display(self):
         """Display PyMol session using matplotlib
@@ -64,11 +65,10 @@ class MolViewer(object):
         fig = plt.figure(figsize=(20, 20))
         ax = fig.add_subplot(111)
         ax.axis('off')
-        fh = tempfile.NamedTemporaryFile()
-        self._server.do("cmd.png('%s')" % fh.name)
+        fh = tempfile.NamedTemporaryFile(suffix='.png')
+        self._server.do("png {};".format(fh.name))
         ax.imshow(mpimg.imread(fh.name))
-        os.close(fh)
-        return fig
+        #return fig
 
 # Create a default instance for convenience
 viewer = MolViewer()
