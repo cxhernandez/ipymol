@@ -62,6 +62,7 @@ class MolViewer(object):
         fh = tempfile.NamedTemporaryFile(suffix='.png')
         self._server.do(f'png {fh.name};')
         ax.imshow(mpimg.imread(fh.name))
+        os.close(fh)
         return fig
 
 
