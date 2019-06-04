@@ -1,16 +1,12 @@
 from __future__ import print_function
 
 import os
-import time
 import tempfile
 import threading
-import numpy as np
-import warnings
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-from .compat import Image, Server
-
+from .compat import Server
 
 HOST = os.environ.get('PYMOL_RPCHOST', 'localhost')
 PORT = 9123
@@ -22,7 +18,7 @@ class MolViewer(object):
         self.port = int(port)
         self._thread = threading.Thread(
             target=os.system,
-            args=(('pymol -RQ',)),
+            args=(('pymol -RQ', )),
         )
         self._thread.daemon = True
 
@@ -39,9 +35,7 @@ class MolViewer(object):
             print("A PyMOL RPC server is already running.")
             return
         self._thread.start()
-        self._server = Server(
-            uri="http://%s:%d/RPC2" % (self.host, self.port)
-        )
+        self._server = Server(uri="http://%s:%d/RPC2" % (self.host, self.port))
 
         # check if the server is online yet, then add methods
         server_online = False
@@ -50,8 +44,9 @@ class MolViewer(object):
                 if hasattr(self, '_server'):
                     self._add_methods()
                 server_online = True
-            except:
+            except BaseException:
                 pass
+        self._add_methods()
 
     def display(self):
         """Display PyMol session using matplotlib
@@ -64,11 +59,12 @@ class MolViewer(object):
         fig = plt.figure(figsize=(20, 20))
         ax = fig.add_subplot(111)
         ax.axis('off')
-        fh = tempfile.NamedTemporaryFile()
-        self._server.do("cmd.png('%s')" % fh.name)
+        fh = tempfile.NamedTemporaryFile(suffix='.png')
+        self._server.do(f'png {fh.name};')
         ax.imshow(mpimg.imread(fh.name))
         os.close(fh)
         return fig
+
 
 # Create a default instance for convenience
 viewer = MolViewer()
