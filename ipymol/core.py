@@ -63,8 +63,14 @@ class MolViewer(object):
         if self._process_is_running():
             self._process.terminate()
 
-    def display(self, ray=0):
+    def display(self, width=0, height=0, ray=False, timeout=120):
         """Display PyMol session
+
+        :param width: width in pixels (0 uses current viewport)
+        :param height: height in pixels (0 uses current viewport)
+        :param ray: use ray tracing (if running PyMOL headless, this parameter
+        has no effect and ray tracing is always used)
+        :param timeout: timeout in seconds
 
         Returns
         -------
@@ -75,23 +81,26 @@ class MolViewer(object):
         from IPython.display import display
         from ipywidgets import IntProgress
 
+        progress_max = int((timeout * 20)**0.5)
         progress = None
         filename = tempfile.mktemp('.png')
 
         try:
-            self._server.png(filename, 0, 0, -1, int(ray))
+            self._server.png(filename, width, height, -1, int(ray))
 
-            # ~2min timeout
-            for i in range(1, 50):
+            for i in range(1, progress_max):
                 if os.path.exists(filename):
                     break
 
                 if progress is None:
-                    progress = IntProgress(min=0, max=50)
+                    progress = IntProgress(min=0, max=progress_max)
                     display(progress)
 
                 progress.value += 1
                 time.sleep(i / 10.0)
+
+            if not os.path.exists(filename):
+                raise RuntimeError('timeout exceeded')
 
             return Image(filename)
         finally:
