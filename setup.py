@@ -23,6 +23,8 @@ def readlist(filename):
 # if we are running on python 3, enable 2to3 and
 # let it use the custom fixers from the custom_fixers
 # package.
+# setuptools > 58.0.0 deprecated the 2to3 function, 
+# you can use "pip install 'setuptools==58.0.0'" to fix this.
 extra = {}
 if sys.version_info >= (3, 0):
     extra.update(
@@ -34,10 +36,10 @@ setup(
     version=VERSION,
     description=('IPyMOL allows you to control PyMOL sessions via IPython.'),
     long_description = read('README.rst'),
-    platforms = (
+    platforms = [
         "Windows", "Linux", "Mac OS-X", "Unix",
-    ),
-    classifiers = (
+    ],
+    classifiers = [
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
@@ -52,7 +54,7 @@ setup(
         'Operating System :: MacOS',
         'Operating System :: Microsoft :: Windows',
         'Topic :: Scientific/Engineering',
-    ),
+    ],
     keywords = 'ipython notebook pymol protein molecular visualization',
     author="Carlos Xavier Hernandez",
     author_email="cxh@stanford.edu",
